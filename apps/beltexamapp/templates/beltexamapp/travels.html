@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Success!</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+ <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <style>
+            .success{
+                color: green;
+            }
+        </style>
+    </head>
+    <body>
+
+      <h1>Success! Welcome, {{request.session.user}}</h1>
+
+      {% if messages %}
+          {% for message in messages %}
+              <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% endfor %}
+      {% endif %}
+      <h2>Your Trip Schedules</h2>
+      <table>
+        <tr>
+          <th>Destination</th>
+          <th>Travel Start Date</th>
+          <th>Travel End Date</th>
+          <th>Plan</th>
+        </tr>
+        {% for user in users%}
+        <tr>
+          <td><a href="/destination/{{user.id}}">{{user.destination}}</a></td>
+          <td>{{user.start_date}}</td>
+          <td>{{user.end_date}}</td>
+          <td>{{user.description}}</td>
+        </tr>
+          {% endfor %}
+          {% for user in joiners%}
+          <tr>
+            <td><a href="/destination/{{user.id}}">{{user.destination}}</a></td>
+            <td>{{user.start_date}}</td>
+            <td>{{user.end_date}}</td>
+            <td>{{user.description}}</td>
+          </tr>
+            {% endfor %}
+      </table>
+      <br><br>
+      <h2>Other User's Travel Plans</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Destination</th>
+          <th>Travel Start Date</th>
+          <th>Travel end Date</th>
+          <th>Do You Want To Join?</th>
+        </tr>
+        {% for traveler in travelers %}
+        <tr>
+          <td>{{traveler.traveler.first_name}}</td>
+          <td><a href="/destination/{{traveler.id}}">{{traveler.destination}}</a></td>
+          <td>{{traveler.start_date}}</td>
+          <td>{{traveler.end_date}}</td>
+          <td><a href="/join/{{traveler.id}}">join</a></td>
+        </tr>
+          {% endfor %}
+      </table>
+      <br><br>
+      <a href="/add">Add Travel Plan</a><br>
+      <a href="/logout">Logout</a>
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Plan</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+ <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  </head>
+  <body>
+    <a href="/travels/{{id}}">Home</a>
+    <a href="/logout">Logout</a>
+
+    <h3>Add Trip</h3>
+    <!-- Regtags -->
+    {% if messages %}
+          {% for message in messages %}
+              <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% endfor %}
+      {% endif %}
+    <!-- must pass in id -->
+    <form action='/create' method='POST'>
+        {% csrf_token %}
+        Destination: <input type='text' name='destination'><br><br>
+        Description: <input type="text" name="description"><br><br>
+        <!-- Birthday: <input type="date" name="birthday"><br><br> -->
+        Travel Date From: <input type="date" name="start_date"><br><br>
+        Travel Date To: <input type="date" name="end_date"><br><br>
+        <input type="submit" value="add">
+    </form>
+    <!-- Regtags -->
+  </div>
+
+
+  </body>
+</html>

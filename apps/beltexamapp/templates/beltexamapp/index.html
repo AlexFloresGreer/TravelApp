@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login/Registration</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+ <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <style>
+            .error{
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        {% if messages %}
+            {% for message in messages %}
+                <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <form action="/register" method="POST">
+            {% csrf_token %}
+            <label>First Name:<input type="text" name="first_name"></label><br>
+            <label>Last Name:<input type="text" name="last_name"></label><br>
+            <label>Email:<input type="email" name="email"></label><br>
+            <label>Birthday:<input type="date" name="birthday"></label><br>
+            <label>Password:<input type="password" name="password"></label><br>
+            <label>Password Confirmation:<input type="password" name="password_confirmation"></label><br>
+            <label><input type="submit" value="Register"></label><br>
+        </form>
+        <br><br><br>
+        <form action="/login" method="post">
+            {% csrf_token %}
+            <label>Email:<input type="email" name="email"></label><br>
+            <label>Password:<input type="password" name="password"></label><br>
+            <input type="submit" value="Login">
+        </form>
+    </body>
+</html>
